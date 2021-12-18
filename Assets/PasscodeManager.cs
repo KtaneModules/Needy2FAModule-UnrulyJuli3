@@ -47,7 +47,7 @@ public class PasscodeManager : CacheableBehaviour
 	{
 		StringBuilder code = new StringBuilder();
 		for (int i = 0; i < PasscodeLength; i++)
-			code.Append(rnd.Next(0, 10));
+			code.Append(rnd.Next(10));
 
 		return code.ToString();
 	}

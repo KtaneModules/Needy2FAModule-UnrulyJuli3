@@ -15,7 +15,8 @@ public class Needy2FA : ModuleScript
 
 		Get<PasscodeManager>().OnRegenerate += Regenerate;
 
-		Assign(needyTimerExpired: TimeExpired);
+		//Assign(needyTimerExpired: TimeExpired);
+		Get<KMNeedyModule>().OnTimerExpired += TimeExpired;
 	}
 
 	private void SetFocus(bool selected)

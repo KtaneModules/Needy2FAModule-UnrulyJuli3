@@ -79,6 +79,17 @@ public class Keypad : CacheableBehaviour
 			_tickers[i].IsSelected = i == n;
 	}
 
+	private void NavigateSelected(int offset)
+	{
+		SetSelected((_tickers.FindIndex(t => t.IsSelected) + offset).Modulo(_tickers.Count));
+	}
+
+	public void SetValue(int i, int n)
+	{
+		_tickers[i].Value = n;
+		SetSelected(i);
+	}
+
 	private void Update()
 	{
 		if (!_isEnabled || !GetParent<Needy2FA>().IsSelected)
@@ -89,8 +100,12 @@ public class Keypad : CacheableBehaviour
 			if (Input.GetKeyDown(s_keyCodes[n]))
 			{
 				_tickers.First(t => t.IsSelected).Value = n;
-				SetSelected((_tickers.FindIndex(t => t.IsSelected) + 1) % _tickers.Count);
+				NavigateSelected(1);
+				break;
 			}
 		}
+
+		if (Input.GetKeyDown(KeyCode.Backspace))
+			NavigateSelected(-1);
 	}
 }
