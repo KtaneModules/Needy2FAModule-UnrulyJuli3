@@ -54,9 +54,11 @@ public class Keypad : CacheableBehaviour
 
 		foreach (Ticker ticker in _tickers)
 		{
+			if (_isEnabled)
+				ticker.Value = 0;
 			ticker.IsEnabled = _isEnabled;
 			ticker.IsSelected = false;
-			ticker.Value = 0;
+			ticker.SetDisplay();
 		}
 
 		if (_isEnabled)
